@@ -47,7 +47,8 @@ func Test_dir(t *testing.T) {
 }
 
 func TestFlock_TryLock_With_Goroutine(t *testing.T) {
-	s := &TestSuite{}
+	s := &TestSuite{dir: true, opts: []flock.Option{flock.SetFlag(os.O_RDWR)}}
+	s.set
 	goroutine_1_first_list := []string{}
 
 	for i := 0; i < 10; i++ {
